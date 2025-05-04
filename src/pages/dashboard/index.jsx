@@ -5,8 +5,8 @@ import PatientDashboard from './Patient';
 const Dashboard = () => {
   return (
     <>
-      {/* <AdminDashboard /> */}
-      <DoctorDashboard />
+      <AdminDashboard />
+      {/* <DoctorDashboard /> */}
       {/* <PatientDashboard /> */}
     </>
   );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import DonutChart from '../../components/dashboard/DonutChart';
 import Sidebar from '../../layouts/Sidebar';
 import Header from '../../layouts/Header';
 import Select from 'react-select';
@@ -24,7 +23,6 @@ import {
 } from '../../common/imagepath';
 import { Link } from 'react-router';
 import CountUp from 'react-countup';
-import PatientChart from '../../components/dashboard/PatientChart';
 import { patientDepartment } from '../../data/chartoptions/adminDonut';
 import Chart from '../../components/charts/Chart';
 import { patientVisit } from '../../data/chartoptions/patientVisit';

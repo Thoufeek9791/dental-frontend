@@ -20,7 +20,6 @@ import {
   trashicon
 } from '../../common/imagepath';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import RadialPatientsChart from '../../components/dashboard/DonutChart';
 import { Link } from 'react-router';
 import RadialBarChart from '../../components/dashboard/FullChart';
 import { gender } from '../../data/chartoptions/patientDonut';
@@ -226,8 +225,8 @@ const DoctorDashboard = () => {
                 <div className="card">
                   <div className="card-body">
                     <div id="radial-patients" />
-                    <RadialPatientsChart options={gender} />
-                    {/* <Chart options={ChartOptions} /> */}
+                    {/* <RadialPatientsChart options={gender} /> */}
+                    <Chart options={gender} />
                   </div>
                 </div>
               </div>
