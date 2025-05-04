@@ -27,7 +27,7 @@ import { gender } from '../../data/chartoptions/patientDonut';
 import { activity } from '../../data/chartoptions/activity';
 import Chart from '../../components/charts/Chart';
 import { income } from '../../data/chartoptions/income';
-// import { CircularProgressbar } from "react-circular-progressbar";
+// import { CircularProgressbar } from 'react-circular-progressbar';
 const DoctorDashboard = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   // eslint-disable-next-line no-unused-vars
