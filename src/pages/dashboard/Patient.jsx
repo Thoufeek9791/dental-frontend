@@ -28,7 +28,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RadialBarChart from '../../components/dashboard/FullChart';
-import HealthChart from '../../components/dashboard/HealthChart';
 import Chart from '../../components/charts/Chart';
 import { health } from '../../data/chartoptions/health';
 import { heartRate } from '../../data/chartoptions/heartRate';
