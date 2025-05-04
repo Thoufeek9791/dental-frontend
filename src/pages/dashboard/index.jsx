@@ -6,8 +6,8 @@ const Dashboard = () => {
   return (
     <>
       {/* <AdminDashboard /> */}
-      {/* <DoctorDashboard /> */}
-      <PatientDashboard />
+      <DoctorDashboard />
+      {/* <PatientDashboard /> */}
     </>
   );
 };
