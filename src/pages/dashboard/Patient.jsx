@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Header from '../../layouts/Header';
-import Sidebar from '../../layouts/Sidebar';
-import { pressure } from '../../data/chartoptions/pressureChart';
+import Header from '@/layouts/Header';
+import Sidebar from '@/layouts/Sidebar';
+import { pressure } from '@/data/chartoptions/pressureChart';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 //import CountUp from "react-countup";
 import { Link } from 'react-router';
@@ -19,7 +19,7 @@ import {
   blogimg8,
   profiles03,
   imagesend
-} from '../../common/imagepath';
+} from '@/common/imagepath';
 
 import 'react-day-picker/dist/style.css';
 import Select from 'react-select';
@@ -27,12 +27,12 @@ import { DayPicker } from 'react-day-picker';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import RadialBarChart from '../../components/dashboard/FullChart';
-import Chart from '../../components/charts/Chart';
-import { health } from '../../data/chartoptions/health';
-import { heartRate } from '../../data/chartoptions/heartRate';
-import { sleep } from '../../data/chartoptions/sleep';
-import { temperature } from '../../data/chartoptions/temperature';
+import RadialBarChart from '@/components/charts/FullChart';
+import Chart from '@/components/charts/Chart';
+import { health } from '@/data/chartoptions/health';
+import { heartRate } from '@/data/chartoptions/heartRate';
+import { sleep } from '@/data/chartoptions/sleep';
+import { temperature } from '@/data/chartoptions/temperature';
 
 const PatientDashboard = () => {
   const [value, onChange] = useState(new Date());

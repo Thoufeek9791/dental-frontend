@@ -3,21 +3,36 @@
 import React from 'react';
 import { Link } from 'react-router';
 // import FeatherIcon from "feather-icons-react";
-import { login02, loginicon01, loginicon02, loginicon03, loginlogo } from '../common/imagepath';
+import { login02, loginicon01, loginicon02, loginicon03, loginlogo } from '@/common/imagepath';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { useState } from 'react';
 
 import { Eye, EyeOff } from 'feather-icons-react/build/IconComponents';
+import { useLoginMutation } from '@/services/loginApi';
 
 // import ReactPasswordToggleIcon from 'react-password-toggle-icon';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({ phone: '', otp: '' });
+
+  const [login] = useLoginMutation();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const handleChange = (e) => {
+    setFormData((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    const response = await login(data);
+    console.log('final Data', response);
   };
 
   // let inputRef = useRef();
@@ -55,12 +70,18 @@ const Login = () => {
                       </div>
                       <h2>Login</h2>
                       {/* Form */}
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <div className="form-group">
                           <label>
                             Email <span className="login-danger">*</span>
                           </label>
-                          <input className="form-control" type="text" />
+                          <input
+                            className="form-control"
+                            type="text"
+                            value={formData.phone}
+                            name="phone"
+                            onChange={handleChange}
+                          />
                         </div>
                         <div className="form-group">
                           <label>
@@ -69,8 +90,9 @@ const Login = () => {
                           <input
                             type={passwordVisible ? 'password' : ''}
                             className="form-control pass-input"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={formData.otp}
+                            name="otp"
+                            onChange={handleChange}
                           />
                           <span className="toggle-password" onClick={togglePasswordVisibility}>
                             {passwordVisible ? (
@@ -92,9 +114,10 @@ const Login = () => {
                           <Link to="/forgotpassword">Forgot Password?</Link>
                         </div>
                         <div className="form-group login-btn">
-                          <Link to="/admin-dashboard" className="btn btn-primary btn-block">
+                          {/* <Link to="/admin-dashboard" className="btn btn-primary btn-block">
                             Login
-                          </Link>
+                          </Link> */}
+                          <button className="btn btn-primary btn-block">Login</button>
                         </div>
                       </form>
                       {/* /Form */}

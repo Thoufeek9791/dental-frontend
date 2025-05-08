@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Header from '../../layouts/Header';
-import Sidebar from '../../layouts/Sidebar';
+import Header from '@/layouts/Header';
+import Sidebar from '@/layouts/Sidebar';
 import Select from 'react-select';
 import CountUp from 'react-countup';
 import {
@@ -18,14 +18,14 @@ import {
   sorticon02,
   timericon,
   trashicon
-} from '../../common/imagepath';
+} from '@/common/imagepath';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
 import { Link } from 'react-router';
-import RadialBarChart from '../../components/dashboard/FullChart';
-import { gender } from '../../data/chartoptions/patientDonut';
-import { activity } from '../../data/chartoptions/activity';
-import Chart from '../../components/charts/Chart';
-import { income } from '../../data/chartoptions/income';
+import RadialBarChart from '@/components/charts/FullChart';
+import { gender } from '@/data/chartoptions/patientDonut';
+import { activity } from '@/data/chartoptions/activity';
+import Chart from '@/components/charts/Chart';
+import { income } from '@/data/chartoptions/income';
 // import { CircularProgressbar } from 'react-circular-progressbar';
 const DoctorDashboard = () => {
   const [selectedOption, setSelectedOption] = useState(null);
