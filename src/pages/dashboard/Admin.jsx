@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-import Sidebar from '../../layouts/Sidebar';
-import Header from '../../layouts/Header';
+import Sidebar from '@/layouts/Sidebar';
+import Header from '@/layouts/Header';
 import Select from 'react-select';
 import {
   Avatar2,
@@ -20,12 +20,12 @@ import {
   profile_add,
   scissor,
   user001
-} from '../../common/imagepath';
+} from '@/common/imagepath';
 import { Link } from 'react-router';
 import CountUp from 'react-countup';
-import { patientDepartment } from '../../data/chartoptions/adminDonut';
-import Chart from '../../components/charts/Chart';
-import { patientVisit } from '../../data/chartoptions/patientVisit';
+import { patientDepartment } from '@/data/chartoptions/adminDonut';
+import Chart from '@/components/charts/Chart';
+import { patientVisit } from '@/data/chartoptions/patientVisit';
 
 const AdminDashboard = () => {
   const [selectedOption, setSelectedOption] = useState(null);
