@@ -1,29 +1,47 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { Table } from 'antd';
-import { onShowSizeChange, itemRender } from '@/components/ui/Pagination';
+import React, { useState } from 'react';
 import Header from '@/layouts/Header';
 import Sidebar from '@/layouts/Sidebar';
+import { DatePicker } from 'antd';
+import { onShowSizeChange, itemRender } from '@/components/ui/Pagination';
+import { Table } from 'antd';
 import {
-  blogimg10,
   imagesend,
   pdficon,
+  pdficon2,
   pdficon3,
   pdficon4,
   plusicon,
   refreshicon,
-  searchnormal,
-  blogimg12,
-  blogimg2,
-  blogimg4,
-  blogimg6,
-  blogimg8
+  searchnormal
 } from '@/common/imagepath';
-import { useState } from 'react';
-import { Link } from 'react-router';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
+import { Link } from 'react-router';
+import Select from 'react-select';
+import { Dropdown } from 'react-bootstrap';
 
-const DoctorList = () => {
+const Leave = () => {
+  const [dropdownValue, setDropdownValue] = useState('');
+
+  const handleDropdownChange = (value) => {
+    setDropdownValue(value);
+  };
+  const onChange = (date, dateString) => {
+    // console.log(date, dateString);
+  };
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [options, setOptions] = useState([
+    { value: 1, label: 'Select LeaveType' },
+    { value: 2, label: 'Medical Leave' },
+    { value: 3, label: 'Casual Leave' },
+    { value: 3, label: 'Loss of Pay' }
+  ]);
+  const [leave, setLeave] = useState([
+    { value: 1, label: 'Leave Status' },
+    { value: 2, label: 'Pending' },
+    { value: 3, label: 'Approved' },
+    { value: 3, label: 'Declined' }
+  ]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -35,158 +53,182 @@ const DoctorList = () => {
     selectedRowKeys,
     onChange: onSelectChange
   };
-  const onChange = (date, dateString) => {
-    // console.log(date, dateString);
-  };
-
   const datasource = [
     {
       id: 1,
-      Img: blogimg2,
-      Name: 'Andrea Lalema',
-      Department: 'Otolaryngology',
-      Specialization: 'Infertility',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'Andrea Lalema',
+      LeaveType: 'Medical Leave',
+      From: '02.10.2022',
+      To: '04.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Not Feeling well',
+      Status: 'Approved',
       FIELD9: ''
     },
     {
       id: 2,
-      Img: blogimg4,
-      Name: 'Dr.Smith Bruklin',
-      Department: 'Urology',
-      Specialization: 'Prostate',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'Smith Bruklin',
+      LeaveType: 'Casual Leave',
+      From: '04.10.2022',
+      To: '06.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Going to Vacation',
+      Status: 'Pending',
       FIELD9: ''
     },
     {
       id: 3,
-      Img: blogimg6,
-      Name: 'Dr.William Stephin',
-      Department: 'Radiology',
-      Specialization: 'Cancer',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
-      FIELD9: ''
-    },
-    {
-      id: 4,
-      Img: blogimg12,
-      Name: 'Bernardo James',
-      Department: 'Dentist',
-      Specialization: 'Prostate',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'William Stephin',
+      LeaveType: 'Casual Leave',
+      From: '02.10.2022',
+      To: '04.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Family Function',
+      Status: 'Declined',
       FIELD9: ''
     },
     {
       id: 5,
-      Img: blogimg10,
-      Name: 'Cristina Groves',
-      Department: 'Gynocolgy',
-      Specialization: 'Prostate',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'Cristina Groves',
+      LeaveType: 'Medical Leave',
+      From: '02.10.2022',
+      To: '04.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Family Function',
+      Status: 'New',
       FIELD9: ''
     },
     {
       id: 6,
-      Img: blogimg8,
-      Name: 'Mark Hay Smith',
-      Department: 'Gynocolgy',
-      Specialization: 'Prostate',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'Mark Hay Smith',
+      LeaveType: 'Medical Leave',
+      From: '02.10.2022',
+      To: '04.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Not Feeling well',
+      Status: 'Approved',
       FIELD9: ''
     },
     {
       id: 7,
-      Img: blogimg2,
-      Name: 'Andrea Lalema',
-      Department: 'Otolaryngology',
-      Specialization: 'Infertility',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'Andrea Lalema',
+      LeaveType: 'Medical Leave',
+      From: '02.10.2022',
+      To: '04.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Family Function',
+      Status: 'Approved',
       FIELD9: ''
     },
     {
       id: 8,
-      Img: blogimg4,
-      Name: 'Dr.Smith Bruklin',
-      Department: 'Urology',
-      Specialization: 'Prostate',
-      Degree: 'MBBS, MS',
-      Mobile: '+1 23 456890',
-      Email: 'example@email.com',
-      JoiningDate: '01.10.2022',
+      EmployeeName: 'Smith Bruklin',
+      LeaveType: 'Casual Leave',
+      From: '02.10.2022',
+      To: '04.10.2022',
+      Noofdays: '2 Days',
+      Reason: 'Not Feeling well',
+      Status: 'Approved',
       FIELD9: ''
     }
   ];
+
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'Name',
+      title: 'EmployeeName',
+      dataIndex: 'EmployeeName',
+      sorter: (a, b) => a.EmployeeName.length - b.EmployeeName.length
+    },
+    {
+      title: 'LeaveType',
+      dataIndex: 'LeaveType',
+      sorter: (a, b) => a.LeaveType.length - b.LeaveType.length
+    },
+    {
+      title: 'From',
+      dataIndex: 'From',
+      sorter: (a, b) => a.From.length - b.From.length
+    },
+    {
+      title: 'To',
+      dataIndex: 'To',
+      sorter: (a, b) => a.To.length - b.To.length
+    },
+    {
+      title: 'Noofdays',
+      dataIndex: 'Noofdays',
+      sorter: (a, b) => a.Noofdays.length - b.Noofdays.length
+    },
+
+    {
+      title: 'Reason',
+      dataIndex: 'Reason',
+      sorter: (a, b) => a.Reason.length - b.Reason.length
+    },
+    {
+      title: 'Status',
+      dataIndex: 'Status',
+      // key: 'status',
       render: (text, record) => (
-        <>
-          <h2 className="profile-image">
-            <Link to="#" className="avatar avatar-sm me-2">
-              <img className="avatar-img rounded-circle" src={record.Img} alt="User Image" />
-            </Link>
-            <Link to="#">{record.Name}</Link>
-          </h2>
-        </>
-      ),
-      sorter: (a, b) => a.Name.length - b.Name.length
-    },
-    {
-      title: 'Department',
-      dataIndex: 'Department',
-      sorter: (a, b) => a.Department.length - b.Department.length
-    },
-    {
-      title: 'Specialization',
-      dataIndex: 'Specialization',
-      sorter: (a, b) => a.Specialization.length - b.Specialization.length
-    },
-    {
-      title: 'Degree',
-      dataIndex: 'Degree',
-      sorter: (a, b) => a.Degree.length - b.Degree.length
-    },
-    {
-      title: 'Mobile',
-      dataIndex: 'Mobile',
-      sorter: (a, b) => a.Mobile.length - b.Mobile.length,
-      render: (text, record) => (
-        <>
-          <Link to="#">{record.Mobile}</Link>
-        </>
+        <div>
+          <Dropdown onSelect={handleDropdownChange}>
+            {text === 'Approved' && (
+              <span className="custom1-badge status-green ">
+                {text}
+                <Dropdown.Toggle variant=""></Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="New">New</Dropdown.Item>
+                  <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
+                  <Dropdown.Item eventKey="Approved">Approved</Dropdown.Item>
+                  <Dropdown.Item eventKey="Declined">Declined</Dropdown.Item>
+                </Dropdown.Menu>
+              </span>
+            )}
+          </Dropdown>
+          <Dropdown onSelect={handleDropdownChange}>
+            {text === 'Pending' && (
+              <span className="custom1-badge status-orange ">
+                {text}
+                <Dropdown.Toggle variant=""></Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="New">New</Dropdown.Item>
+                  <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
+                  <Dropdown.Item eventKey="Approved">Approved</Dropdown.Item>
+                  <Dropdown.Item eventKey="Declined">Declined</Dropdown.Item>
+                </Dropdown.Menu>
+              </span>
+            )}
+          </Dropdown>
+          <Dropdown onSelect={handleDropdownChange}>
+            {text === 'Declined' && (
+              <span className="custom1-badge status-pink ">
+                {text}
+                <Dropdown.Toggle variant=""></Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="New">New</Dropdown.Item>
+                  <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
+                  <Dropdown.Item eventKey="Approved">Approved</Dropdown.Item>
+                  <Dropdown.Item eventKey="Declined">Declined</Dropdown.Item>
+                </Dropdown.Menu>
+              </span>
+            )}
+          </Dropdown>
+          <Dropdown onSelect={handleDropdownChange}>
+            {text === 'New' && (
+              <span className="custom1-badge status-purple ">
+                {text}
+                <Dropdown.Toggle variant=""></Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="New">New</Dropdown.Item>
+                  <Dropdown.Item eventKey="Pending">Pending</Dropdown.Item>
+                  <Dropdown.Item eventKey="Approved">Approved</Dropdown.Item>
+                  <Dropdown.Item eventKey="Declined">Declined</Dropdown.Item>
+                </Dropdown.Menu>
+              </span>
+            )}
+          </Dropdown>
+        </div>
       )
-    },
-    {
-      title: 'Email',
-      dataIndex: 'Email',
-      sorter: (a, b) => a.Email.length - b.Email.length
-    },
-    {
-      title: 'JoiningDate',
-      dataIndex: 'JoiningDate',
-      sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length
     },
     {
       title: '',
@@ -204,7 +246,7 @@ const DoctorList = () => {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to="/editdoctor">
+                <Link className="dropdown-item" to="/editleave">
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
@@ -226,9 +268,9 @@ const DoctorList = () => {
 
   return (
     <>
-      <Header />
-      <Sidebar id="menu-item1" id1="menu-items1" activeClassName="doctor-list" />
-      <>
+      <div className="main-wrapper">
+        <Header />
+        <Sidebar id="menu-item3" id1="menu-items3" activeClassName="leaves" />
         <div className="page-wrapper">
           <div className="content">
             {/* Page Header */}
@@ -237,14 +279,14 @@ const DoctorList = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="#">Doctors </Link>
+                      <Link to="/add-leave">Staffs </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
                         <FeatherIcon icon="chevron-right" />
                       </i>
                     </li>
-                    <li className="breadcrumb-item active">Doctors List</li>
+                    <li className="breadcrumb-item active">Leave Request</li>
                   </ul>
                 </div>
               </div>
@@ -259,7 +301,7 @@ const DoctorList = () => {
                       <div className="row align-items-center">
                         <div className="col">
                           <div className="doctor-table-blk">
-                            <h3>Doctors List</h3>
+                            <h3>Leave Request</h3>
                             <div className="doctor-search-blk">
                               <div className="top-nav-search table-search-blk">
                                 <form>
@@ -274,7 +316,7 @@ const DoctorList = () => {
                                 </form>
                               </div>
                               <div className="add-group">
-                                <Link to="/add-doctor" className="btn btn-primary add-pluss ms-2">
+                                <Link to="/add-leave" className="btn btn-primary add-pluss ms-2">
                                   <img src={plusicon} alt="#" />
                                 </Link>
                                 <Link to="#" className="btn btn-primary doctor-refresh ms-2">
@@ -288,7 +330,9 @@ const DoctorList = () => {
                           <Link to="#" className=" me-2">
                             <img src={pdficon} alt="#" />
                           </Link>
-                          <Link to="#" className=" me-2"></Link>
+                          <Link to="#" className=" me-2">
+                            <img src={pdficon2} alt="#" />
+                          </Link>
                           <Link to="#" className=" me-2">
                             <img src={pdficon3} alt="#" />
                           </Link>
@@ -299,7 +343,73 @@ const DoctorList = () => {
                       </div>
                     </div>
                     {/* /Table Header */}
-                    <div className="table-responsive doctor-list">
+                    <div className="staff-search-table">
+                      <form>
+                        <div className="row">
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms">
+                              <label>Employee Name </label>
+                              <input className="form-control" type="text" />
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms">
+                              <label>Leave Type </label>
+                              <Select
+                                defaultValue={selectedOption}
+                                onChange={setSelectedOption}
+                                options={options}
+                                menuPortalTarget={document.body}
+                                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms">
+                              <label>Leave Status </label>
+                              <Select
+                                defaultValue={selectedOption}
+                                onChange={setSelectedOption}
+                                options={leave}
+                                menuPortalTarget={document.body}
+                                styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms cal-icon">
+                              <label>From </label>
+                              <DatePicker
+                                className="form-control datetimepicker"
+                                onChange={onChange}
+                                suffixIcon={null}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="form-group local-forms cal-icon">
+                              <label>To </label>
+                              <DatePicker
+                                className="form-control datetimepicker"
+                                onChange={onChange}
+                                suffixIcon={null}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-6 col-xl-4">
+                            <div className="doctor-submit">
+                              <button
+                                type="submit"
+                                className="btn btn-primary submit-list-form me-2"
+                              >
+                                Search
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div className="table-responsive">
                       <Table
                         pagination={{
                           total: datasource.length,
@@ -313,10 +423,10 @@ const DoctorList = () => {
                         dataSource={datasource}
                         rowSelection={rowSelection}
                         rowKey={(record) => record.id}
-                        style={{
-                          backgroundColor: '#f2f2f2' // Replace with your desired background color for the table
-                        }}
                       />
+                      <table className="table border-0 custom-table comman-table datatable mb-0">
+                        <tbody></tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -577,31 +687,10 @@ const DoctorList = () => {
               </div>
             </div>
           </div>
-          <div id="delete_patient" className="modal fade delete-modal" role="dialog">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-body text-center">
-                  <img src={imagesend} alt="#" width={50} height={46} />
-                  <h3>Are you sure want to delete this ?</h3>
-                  <div className="m-t-20">
-                    {' '}
-                    <Link to="#" className="btn btn-white me-2" data-bs-dismiss="modal">
-                      Close
-                    </Link>
-                    <button type="submit" className="btn btn-danger">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </>
-
-      <></>
+      </div>
     </>
   );
 };
 
-export default DoctorList;
+export default Leave;

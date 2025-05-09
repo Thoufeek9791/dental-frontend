@@ -17,7 +17,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({ phone: '', otp: '' });
 
-  const [login] = useLoginMutation();
+  const [login, { error, isLoading, isError }] = useLoginMutation();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -30,10 +30,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    const response = await login(data);
-    console.log('final Data', response);
+    const loginData = Object.fromEntries(formData.entries());
+    const { data } = await login(loginData).unwrap();
+    console.log('final Data', data);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>{error.data.message}</div>;
+  }
 
   // let inputRef = useRef();
   // const showIcon = () => <i className="feather feather-eye" aria-hidden="true">
