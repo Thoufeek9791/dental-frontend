@@ -1,7 +1,7 @@
 // export const requiredRoles = ['admin', 'superadmin'];
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 // import FeatherIcon from "feather-icons-react";
 import { login02, loginicon01, loginicon02, loginicon03, loginlogo } from '@/common/imagepath';
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -10,6 +10,8 @@ import { useState } from 'react';
 
 import { Eye, EyeOff } from 'feather-icons-react/build/IconComponents';
 import { useLoginMutation } from '@/services/loginApi';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/slice/userSlice';
 
 // import ReactPasswordToggleIcon from 'react-password-toggle-icon';
 
@@ -17,7 +19,9 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({ phone: '', otp: '' });
 
-  const [login, { error, isLoading, isError }] = useLoginMutation();
+  const [login, { error, isLoading, isError, isSuccess }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -31,8 +35,13 @@ const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const loginData = Object.fromEntries(formData.entries());
-    const { data } = await login(loginData).unwrap();
-    console.log('final Data', data);
+    try {
+      const { data } = await login(loginData).unwrap();
+      dispatch(setUser({ user: data }));
+      console.log('final Data', data);
+    } catch (err) {
+      console.log('error', err);
+    }
   };
 
   if (isLoading) {
@@ -41,6 +50,10 @@ const Login = () => {
 
   if (isError) {
     return <div>{error.data.message}</div>;
+  }
+
+  if (isSuccess) {
+    navigate('/dashboard', { replace: true });
   }
 
   // let inputRef = useRef();

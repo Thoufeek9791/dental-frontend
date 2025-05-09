@@ -233,6 +233,51 @@ const Sidebar = (props) => {
                 <li className="submenu">
                   <Link
                     to="#"
+                    id="menu-item-2"
+                    onClick={(e) => handleClick(e, 'menu-item-2', 'menu-items-2')}
+                  >
+                    <span className="menu-side">
+                      <img src={patients} alt="" />
+                    </span>{' '}
+                    <span>Clinics </span> <span className="menu-arrow" />
+                  </Link>
+                  <ul style={{ display: 'none' }} className="menu-items-2">
+                    <li>
+                      <Link
+                        className={props?.activeClassName === 'clinic-list' ? 'active' : ''}
+                        to="/cliniclist"
+                      >
+                        Clinics List
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={props?.activeClassName === 'add-clinic' ? 'active' : ''}
+                        to="/addclinic"
+                      >
+                        Add Clinics
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className={props?.activeClassName === 'edit-clinic' ? 'active' : ''}
+                        to="/editclinic"
+                      >
+                        Edit Clinics
+                      </Link>
+                    </li>
+                    {/* <li>
+                      <Link
+                        className={props?.activeClassName === 'patient' ? 'active' : ''}
+                        to="/patientsprofile">
+                        Patients Profile
+                      </Link>
+                    </li> */}
+                  </ul>
+                </li>
+                <li className="submenu">
+                  <Link
+                    to="#"
                     id="menu-item3"
                     onClick={(e) => handleClick(e, 'menu-item3', 'menu-items3')}
                   >
