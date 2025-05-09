@@ -1,4 +1,3 @@
-// services/loginApi.js
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from './baseQuery';
 
@@ -7,11 +6,11 @@ export const loginApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: ({ phone, otp }) => ({
+      query: (data) => ({
         url: '/auth/login',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: { phone, otp }
+        body: data
       })
     })
   })

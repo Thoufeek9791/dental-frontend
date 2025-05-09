@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Table } from 'antd';
-import { onShowSizeChange, itemRender } from '@/components/ui/Pagination';
 import Header from '@/layouts/Header';
 import Sidebar from '@/layouts/Sidebar';
 import {
@@ -22,8 +20,8 @@ import {
 import { useState } from 'react';
 import { Link } from 'react-router';
 import FeatherIcon from 'feather-icons-react/build/FeatherIcon';
-
-const DoctorList = () => {
+import { onShowSizeChange, itemRender } from '@/components/ui/Pagination';
+const StaffList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -35,10 +33,6 @@ const DoctorList = () => {
     selectedRowKeys,
     onChange: onSelectChange
   };
-  const onChange = (date, dateString) => {
-    // console.log(date, dateString);
-  };
-
   const datasource = [
     {
       id: 1,
@@ -145,13 +139,12 @@ const DoctorList = () => {
         <>
           <h2 className="profile-image">
             <Link to="#" className="avatar avatar-sm me-2">
-              <img className="avatar-img rounded-circle" src={record.Img} alt="User Image" />
+              <img className="avatar-img rounded-circle" src={record.Img} alt="rounded circle" />
             </Link>
             <Link to="#">{record.Name}</Link>
           </h2>
         </>
-      ),
-      sorter: (a, b) => a.Name.length - b.Name.length
+      )
     },
     {
       title: 'Department',
@@ -191,43 +184,47 @@ const DoctorList = () => {
     {
       title: '',
       dataIndex: 'FIELD8',
-      render: (text, record) => (
-        <>
-          <div className="text-end">
-            <div className="dropdown dropdown-action">
-              <Link
-                to="#"
-                className="action-icon dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-ellipsis-v" />
-              </Link>
-              <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to="/editdoctor">
-                  <i className="far fa-edit me-2" />
-                  Edit
-                </Link>
+      render: (text, record) => {
+        console.log(text, record);
+
+        return (
+          <>
+            <div className="text-end">
+              <div className="dropdown dropdown-action">
                 <Link
-                  className="dropdown-item"
                   to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#delete_patient"
+                  className="action-icon dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
+                  <i className="fas fa-ellipsis-v" />
                 </Link>
+                <div className="dropdown-menu dropdown-menu-end">
+                  <Link className="dropdown-item" to="/editstaff">
+                    <i className="far fa-edit me-2" />
+                    Edit
+                  </Link>
+                  <Link
+                    className="dropdown-item"
+                    to="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#delete_patient"
+                  >
+                    <i className="fa fa-trash-alt m-r-5"></i> Delete
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      )
+          </>
+        );
+      }
     }
   ];
 
   return (
     <>
       <Header />
-      <Sidebar id="menu-item1" id1="menu-items1" activeClassName="doctor-list" />
+      <Sidebar id="menu-item3" id1="menu-items3" activeClassName="staff-list" />
       <>
         <div className="page-wrapper">
           <div className="content">
@@ -237,14 +234,14 @@ const DoctorList = () => {
                 <div className="col-sm-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link to="#">Doctors </Link>
+                      <Link to="#">Staff </Link>
                     </li>
                     <li className="breadcrumb-item">
                       <i className="feather-chevron-right">
                         <FeatherIcon icon="chevron-right" />
                       </i>
                     </li>
-                    <li className="breadcrumb-item active">Doctors List</li>
+                    <li className="breadcrumb-item active">Staff List</li>
                   </ul>
                 </div>
               </div>
@@ -259,7 +256,7 @@ const DoctorList = () => {
                       <div className="row align-items-center">
                         <div className="col">
                           <div className="doctor-table-blk">
-                            <h3>Doctors List</h3>
+                            <h3> Staff List</h3>
                             <div className="doctor-search-blk">
                               <div className="top-nav-search table-search-blk">
                                 <form>
@@ -274,7 +271,7 @@ const DoctorList = () => {
                                 </form>
                               </div>
                               <div className="add-group">
-                                <Link to="/add-doctor" className="btn btn-primary add-pluss ms-2">
+                                <Link to="/addstaff" className="btn btn-primary add-pluss ms-2">
                                   <img src={plusicon} alt="#" />
                                 </Link>
                                 <Link to="#" className="btn btn-primary doctor-refresh ms-2">
@@ -313,10 +310,23 @@ const DoctorList = () => {
                         dataSource={datasource}
                         rowSelection={rowSelection}
                         rowKey={(record) => record.id}
-                        style={{
-                          backgroundColor: '#f2f2f2' // Replace with your desired background color for the table
-                        }}
                       />
+
+                      {/* <Table className='table border-0 custom-table comman-table datatable mb-0'
+                        // pagination={{
+                        //   total: datasource.length,
+                        //   showTotal: (total, range) =>
+                        //     `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                        //   showSizeChanger: true,
+                        //   onShowSizeChange: onShowSizeChange,
+                        //   itemRender: itemRender,
+                        // }}
+                        columns={columns}
+                        dataSource={datasource}
+
+                        rowSelection={rowSelection}
+                        rowKey={(record) => record.id}
+                      /> */}
                     </div>
                   </div>
                 </div>
@@ -577,25 +587,6 @@ const DoctorList = () => {
               </div>
             </div>
           </div>
-          <div id="delete_patient" className="modal fade delete-modal" role="dialog">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-body text-center">
-                  <img src={imagesend} alt="#" width={50} height={46} />
-                  <h3>Are you sure want to delete this ?</h3>
-                  <div className="m-t-20">
-                    {' '}
-                    <Link to="#" className="btn btn-white me-2" data-bs-dismiss="modal">
-                      Close
-                    </Link>
-                    <button type="submit" className="btn btn-danger">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </>
 
@@ -604,4 +595,4 @@ const DoctorList = () => {
   );
 };
 
-export default DoctorList;
+export default StaffList;
