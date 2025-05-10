@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Header from '@/layouts/Header';
 import Sidebar from '@/layouts/Sidebar';
@@ -11,33 +10,33 @@ import { Link } from 'react-router';
 const AddStaff = () => {
   const [show, setShow] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [options, setOptions] = useState([
+  const [options] = useState([
     { value: 1, label: 'Select City' },
     { value: 2, label: 'Alaska' },
     { value: 3, label: 'Los Angeles' }
   ]);
 
-  const [statevalue, setStateValue] = useState([
+  const [statevalue] = useState([
     { value: 1, label: 'Select State' },
     { value: 2, label: 'Alaska' },
     { value: 3, label: 'California' }
   ]);
-  const [option, setOption] = useState([
+  const [option] = useState([
     { value: 1, label: 'Select Country' },
     { value: 2, label: 'Usa' },
     { value: 3, label: 'Uk' },
     { value: 4, label: 'Italy' }
   ]);
-  const [department, setDepartment] = useState([
+  const [department] = useState([
     { value: 1, label: 'Orthopedics' },
     { value: 2, label: 'Radiology' },
     { value: 3, label: 'Dentist' }
   ]);
 
   const onChange = (date, dateString) => {
-    // console.log(date, dateString);
+    console.log(date, dateString);
   };
-  const loadFile = (event) => {
+  const loadFile = () => {
     // console.log(event,"event");
   };
 
@@ -275,7 +274,7 @@ const AddStaff = () => {
                               onChange={setSelectedOption}
                               options={options}
                               menuPortalTarget={document.body}
-                              styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                              // styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
                               id="search-commodity"
                               components={{
                                 IndicatorSeparator: () => null
@@ -319,7 +318,7 @@ const AddStaff = () => {
                               onChange={setSelectedOption}
                               options={option}
                               menuPortalTarget={document.body}
-                              styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+                              // styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
                               id="search-commodity"
                               components={{
                                 IndicatorSeparator: () => null
